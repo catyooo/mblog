@@ -9,6 +9,7 @@
 */
 package mblog.web.controller;
 
+import mblog.web.controller.desk.Views;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -16,12 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import mblog.web.controller.desk.Views;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 登录页
+ *
  * @author langhsu
  */
 @Controller
@@ -29,31 +29,33 @@ public class LoginController extends BaseController {
 
     /**
      * 跳转登录页
+     *
      * @return
      */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String view() {
-		return getView(Views.LOGIN);
-	}
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String view() {
+        return getView(Views.LOGIN);
+    }
 
     /**
      * 提交登录
+     *
      * @param username
      * @param password
      * @param model
      * @return
      */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(String username, String password,@RequestParam(value = "rememberMe",defaultValue = "0") int rememberMe, ModelMap model) {
-		String ret = getView(Views.LOGIN);
-		
-		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(String username, String password, @RequestParam(value = "rememberMe", defaultValue = "0") int rememberMe, ModelMap model) {
+        String ret = getView(Views.LOGIN);
+
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             return ret;
         }
-		
-		AuthenticationToken token = createToken(username, password);
+
+        AuthenticationToken token = createToken(username, password);
         if (token == null) {
-        	model.put("message", "用户名或密码错误");
+            model.put("message", "用户名或密码错误");
             return ret;
         }
 
@@ -70,16 +72,16 @@ public class LoginController extends BaseController {
 //            pushBadgesCount();
         } catch (AuthenticationException e) {
             if (e instanceof UnknownAccountException) {
-            	model.put("message", "用户不存在");
+                model.put("message", "用户不存在");
             } else if (e instanceof LockedAccountException) {
-            	model.put("message", "用户被禁用");
+                model.put("message", "用户被禁用");
             } else {
-            	model.put("message", "用户认证失败");
+                model.put("message", "用户认证失败");
             }
         }
 
         return ret;
-	}
+    }
 
 //    private void pushBadgesCount() {
 //        new Thread(() -> {
