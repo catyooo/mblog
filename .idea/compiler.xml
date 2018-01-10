@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mblog-base" />
+        <module name="mblog-core" />
+        <module name="mblog-plugin-example" />
+        <module name="mblog-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mblog" target="1.8" />
+      <module name="mblog-base" target="1.8" />
+      <module name="mblog-core" target="1.8" />
+      <module name="mblog-plugin-example" target="1.8" />
+      <module name="mblog-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
